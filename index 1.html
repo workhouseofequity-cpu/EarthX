@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House of Equity - Better Living</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Prompt', 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #494949;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #FF9A8B 0%, #FFA766 50%, #F4B70F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: #049e68;
+            border-radius: 50%;
+            top: -200px;
+            left: -200px;
+            opacity: 0.3;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: #F5A4C3;
+            border-radius: 50%;
+            bottom: -150px;
+            right: -150px;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 40px 20px;
+            max-width: 800px;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .logo::before {
+            content: '🏠';
+            font-size: 80px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            font-weight: 800;
+        }
+
+        .hero-subtitle {
+            font-size: 2em;
+            color: white;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .tagline {
+            font-size: 1.5em;
+            color: white;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 2em;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #049e68;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(4, 158, 104, 0.4);
+            margin-top: 20px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(4, 158, 104, 0.6);
+            background: #038557;
+        }
+
+        /* What is Equity Section */
+        .equity-section {
+            padding: 100px 20px;
+            background: #eeeeef;
+            text-align: center;
+        }
+
+        .equity-section h2 {
+            font-size: 3em;
+            color: #494949;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .equity-comparison {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .comparison-item {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .comparison-item h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #737373;
+        }
+
+        .comparison-item.equity h3 {
+            color: #049e68;
+        }
+
+        .comparison-illustration {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #187256;
+            font-weight: 700;
+        }
+
+        .about-content {
+            background: linear-gradient(135deg, #049e68, #187256);
+            padding: 60px;
+            border-radius: 30px;
+            color: white;
+            box-shadow: 0 10px 40px rgba(4, 158, 104, 0.3);
+        }
+
+        .about-content p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Vision & Mission */
+        .vision-mission {
+            padding: 100px 20px;
+            background: #eeeeef;
+        }
+
+        .vm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vm-card {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .vm-card h3 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #049e68;
+            font-weight: 700;
+        }
+
+        .vm-card p,
+        .vm-card li {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #494949;
+        }
+
+        .vm-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .vm-card li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .vm-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #049e68;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        /* Goals Section */
+        .goals-section {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .goal-card {
+            background: linear-gradient(135deg, #f8f9fa, #eeeeef);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #049e68, #F4B70F, #F5A4C3);
+        }
+
+        .goal-card:hover {
+            transform: translateY(-10px);
+            border-color: #049e68;
+            box-shadow: 0 15px 40px rgba(4, 158, 104, 0.3);
+        }
+
+        .goal-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #049e68, #187256);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 0 auto 30px;
+            box-shadow: 0 5px 20px rgba(4, 158, 104, 0.4);
+        }
+
+        .goal-card h3 {
+            font-size: 1.8em;
+            color: #187256;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .goal-card p {
+            font-size: 1.1em;
+            color: #494949;
+            line-height: 1.6;
+        }
+
+        /* Focus Areas */
+        .focus-areas {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #049e68 0%, #187256 100%);
+            color: white;
+        }
+
+        .focus-areas .section-title {
+            color: white;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .area-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .area-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .area-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+        }
+
+        .area-card h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #F4B70F;
+            font-weight: 700;
+        }
+
+        .area-card p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 20px;
+            background: #eeeeef;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #049e68, #187256);
+            color: white;
+        }
+
+        .project-header.gender {
+            background: linear-gradient(135deg, #F5A4C3, #FF9A8B);
+        }
+
+        .project-header.education {
+            background: linear-gradient(135deg, #FFA766, #F4B70F);
+        }
+
+        .project-header.environment {
+            background: linear-gradient(135deg, #049e68, #187256);
+        }
+
+        .project-header h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .project-body {
+            padding: 30px;
+        }
+
+        .project-body p {
+            font-size: 1.1em;
+            color: #494949;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #049e68;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #737373;
+            margin-top: 5px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #f8f9fa, #eeeeef);
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5em;
+            color: #187256;
+            margin-bottom: 15px;
+        }
+
+        .contact-card p {
+            font-size: 1.1em;
+            color: #494949;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #049e68, #187256);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(4, 158, 104, 0.3);
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(4, 158, 104, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #494949, #737373);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 1.1em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5em;
+            }
+
+            .tagline {
+                font-size: 1.2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .vm-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                padding: 30px;
+            }
+
+            .vm-card {
+                padding: 30px;
+            }
+
+            .goal-card,
+            .area-card {
+                padding: 30px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* Decorative Elements */
+        .shape-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .shape-blob-1 {
+            width: 400px;
+            height: 400px;
+            background: #049e68;
+            top: 10%;
+            left: 5%;
+        }
+
+        .shape-blob-2 {
+            width: 350px;
+            height: 350px;
+            background: #F4B70F;
+            bottom: 10%;
+            right: 5%;
+        }
+
+        .shape-blob-3 {
+            width: 300px;
+            height: 300px;
+            background: #F5A4C3;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo"></div>
+            <h1>House of Equity</h1>
+            <div class="hero-subtitle">Better Living</div>
+            <p class="tagline">🏠 create a better world for everyone</p>
+            <a href="hackathon.html" class="cta-btn">🌍 Join EarthX Hackathon 2026</a>
+        </div>
+        <div class="scroll-indicator">↓</div>
+    </section>
+
+    <!-- What is Equity Section -->
+    <section class="equity-section">
+        <h2>What is EQUITY?</h2>
+        <div class="equity-comparison">
+            <div class="comparison-item">
+                <div class="comparison-illustration">⚖️</div>
+                <h3>Equality</h3>
+                <p>ให้ทุกคนได้รับสิ่งเดียวกัน โดยไม่คำนึงถึงความแตกต่าง</p>
+            </div>
+            <div class="comparison-item equity">
+                <div class="comparison-illustration">🎯</div>
+                <h3>Equity</h3>
+                <p>ให้ทุกคนได้รับสิ่งที่เหมาะสมตามความต้องการ เพื่อให้ทุกคนมีโอกาสเท่าเทียมกัน</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="section-title">เกี่ยวกับเรา</h2>
+            <div class="about-content">
+                <p>
+                    <strong>House of Equity</strong> เป็นองค์กรเยาวชนอิสระที่ผลักดันความเท่าเทียมใน 3 ประเด็นหลัก ได้แก่
+                    <strong>Gender, Environment, และ Education</strong>
+                </p>
+                <p>
+                    Our journey began with a common purpose: to drive meaningful social change. This vision led us to
+                    establish House of Equity, a nonprofit devoted to advancing equity in three vital areas—gender
+                    equity with a focus on inclusion, educational access, and environmental justice.
+                </p>
+                <p>
+                    Together, we are committed to creating a lasting, positive impact on society.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="vision-mission">
+        <div class="container">
+            <div class="vm-grid">
+                <div class="vm-card">
+                    <h3>🎯 Vision</h3>
+                    <p>
+                        To be a youth community dedicated to driving positive societal change, focusing on three main
+                        areas: gender, education, and environment equity. This will be achieved through creative and
+                        accessible media, such as engaging activities.
+                    </p>
+                </div>
+                <div class="vm-card">
+                    <h3>🚀 Mission</h3>
+                    <ul>
+                        <li>Create a safe space that allows youth to exchange diverse perspectives in a constructive
+                            manner</li>
+                        <li>Promote understanding, participation in social equity issues, and access to resources
+                            through various mediums</li>
+                        <li>Foster social responsibility by supporting initiatives and projects that contribute to
+                            sustainability and positive change</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Goals Section -->
+    <section class="goals-section">
+        <div class="container">
+            <h2 class="section-title">Our Goals</h2>
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <div class="goal-number">1</div>
+                    <h3>Promote Leadership Development</h3>
+                    <p>พัฒนาภาวะผู้นำของเยาวชนในการสร้างการเปลี่ยนแปลงทางสังคม</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-number">2</div>
+                    <h3>Build Youth Network</h3>
+                    <p>สร้างเครือข่ายเยาวชนที่เข้มแข็งและมีส่วนร่วมในการขับเคลื่อนสังคม</p>
+                </div>
+                <div class="goal-card">
+                    <div class="goal-number">3</div>
+                    <h3>Advocate for Equity</h3>
+                    <p>ผลักดันและสร้างความตรองรู้เกี่ยวกับความเท่าเทียมในทุกมิติ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Focus Areas -->
+    <section class="focus-areas">
+        <div class="container">
+            <h2 class="section-title">Focus Areas</h2>
+            <div class="areas-grid">
+                <div class="area-card">
+                    <div class="area-icon">🌈</div>
+                    <h3>Gender Equity</h3>
+                    <p>ผลักดันความเท่าเทียมทางเพศและความหลากหลายทางเพศ สร้างพื้นที่ปลอดภัยสำหรับทุกคน</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">📚</div>
+                    <h3>Educational Equity</h3>
+                    <p>สร้างโอกาสทางการศึกษาที่เท่าเทียม ลดความเหลื่อมล้ำทางการศึกษา</p>
+                </div>
+                <div class="area-card">
+                    <div class="area-icon">🌱</div>
+                    <h3>Environmental Equity</h3>
+                    <p>ส่งเสริมความยั่งยืนทางสิ่งแวดล้อมและความเป็นธรรมในการเข้าถึงทรัพยากร</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <h2 class="section-title">โครงการของเรา</h2>
+            <div class="projects-grid">
+                <!-- Gender Projects -->
+                <div class="project-card">
+                    <div class="project-header gender">
+                        <h3>🌈 Youth Advocacy Equithon</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>โครงการพัฒนาศักยภาพเยาวชนด้านการสร้างการเปลี่ยนแปลงทางสังคม โดยเน้นประเด็นความเท่าเทียมทางเพศ
+                        </p>
+                        <div class="impact-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">71</div>
+                                <div class="stat-label">Direct Impact</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">4,600</div>
+                                <div class="stat-label">Total Engagement</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Projects -->
+                <div class="project-card">
+                    <div class="project-header education">
+                        <h3>📚 Education × Gender</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>โครงการสร้างความเข้าใจเกี่ยวกับความเท่าเทียมทางการศึกษาและเพศ ผ่านกิจกรรมเชิงปฏิบัติการ</p>
+                        <div class="impact-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">28</div>
+                                <div class="stat-label">Direct Participants</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">2</div>
+                                <div class="stat-label">Cohorts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environment Projects -->
+                <div class="project-card">
+                    <div class="project-header environment">
+                        <h3>🌱 Eyes on Wings</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>โครงการด้านความยั่งยืนและสิ่งแวดล้อม
+                            มุ่งเน้นการสร้างความตระหนักรู้และการดำเนินการเพื่อสิ่งแวดล้อม</p>
+                        <div class="impact-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">Direct Impact</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">SDG 13,14,15</div>
+                                <div class="stat-label">UN Goals</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Projects -->
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3>💧 HEq × Saiyok Springs</h3>
+                    </div>
+                    <div class="project-body">
+                        <p><strong>Clean drinking water for communities, one filter at a time</strong></p>
+                        <p>โครงการจัดหาเครื่องกรองน้ำชีวภาพให้กับชุมชนที่ขาดแคลนน้ำสะอาด</p>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header education">
+                        <h3>🎮 Journey to Equity</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>เล่นเกมให้รู้ทันความเหลื่อมล้ำทางการศึกษา -
+                            เกมบอร์ดที่สร้างความเข้าใจเกี่ยวกับความไม่เท่าเทียมทางการศึกษา</p>
+                        <div class="impact-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">53</div>
+                                <div class="stat-label">Direct Participants</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header environment">
+                        <h3>🌿 Youth Green Circle</h3>
+                    </div>
+                    <div class="project-body">
+                        <p>กลุ่มเยาวชนที่สนใจด้านสิ่งแวดล้อม เรียนรู้และสร้างการเปลี่ยนแปลงผ่านกิจกรรมต่างๆ</p>
+                        <p style="font-size: 0.95em; margin-top: 15px;">
+                            <strong>Episode:</strong> Air Pollution, Water & Environment, Life of Land
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">ติดต่อเรา</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>work.houseofequity@gmail.com</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>Social Media</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-btn" title="Instagram">📷</a>
+                        <a href="#" class="social-btn" title="Facebook">f</a>
+                        <a href="#" class="social-btn" title="LINE">💬</a>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                style="margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #f8f9fa, #eeeeef); border-radius: 20px;">
+                <h3 style="font-size: 2em; color: #187256; margin-bottom: 20px;">🌟 Join Us</h3>
+                <p style="font-size: 1.3em; color: #494949; margin-bottom: 20px;">
+                    <strong>Empowering Change Together</strong>
+                </p>
+                <p style="font-size: 1.1em; color: #737373;">
+                    เราเชื่อว่าทุกคนมีส่วนในการสร้างสังคมที่ดีขึ้น<br>
+                    ร่วมเป็นส่วนหนึ่งของการเปลี่ยนแปลงไปกับเรา
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 House of Equity - Better Living</p>
+        <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">
+            Gender | Education | Environment
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.goal-card, .area-card, .project-card, .vm-card, .contact-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-content');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - (scrolled / 700);
+            }
+        });
+    </script>
+</body>
+
+</html>

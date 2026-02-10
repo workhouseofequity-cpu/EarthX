@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียน - HEq EarthX Hackathon 2026</title>
+    <!-- Modern Thai Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            /* Emerald 600 */
+            --primary-dark: #047857;
+            /* Emerald 700 */
+            --accent: #f59e0b;
+            /* Amber 500 */
+            --danger: #ef4444;
+            --bg-start: #064e3b;
+            /* Emerald 900 */
+            --bg-end: #10b981;
+            /* Emerald 500 */
+            --text-main: #1f2937;
+            --glass: rgba(255, 255, 255, 0.95);
+            --glass-card: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+            padding-bottom: 50px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Decorative Background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin: 30px 0 20px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+
+        /* Competition Tracks */
+        .track-section {
+            margin-bottom: 40px;
+        }
+
+        .section-header-title {
+            text-align: center;
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .track-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .track-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 3px solid transparent;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .track-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .track-card.selected {
+            border-color: var(--accent);
+            background: #ecfdf5;
+            transform: scale(1.02);
+        }
+
+        .track-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            background: #d1fae5;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .track-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+        }
+
+        .track-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        /* Top Logo */
+        .top-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 180px;
+            height: auto;
+            z-index: 1000;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        @media (max-width: 768px) {
+            .top-logo {
+                width: 120px;
+                top: 15px;
+                right: 15px;
+            }
+        }
+
+        /* Main Form */
+        .form-card {
+            background: var(--glass);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .form-section-head {
+            border-bottom: 2px solid #e5e7eb;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: var(--danger);
+        }
+
+        .helper-text {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f9fafb;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Dynamic Member Styling */
+        .member-block {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .member-header {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        /* Proposal Upload */
+        .file-upload-area {
+            border: 2px dashed var(--primary);
+            padding: 30px;
+            text-align: center;
+            border-radius: 16px;
+            background: #ecfdf5;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload-area:hover {
+            background: #d1fae5;
+            border-color: var(--primary-dark);
+        }
+
+        .file-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* Checkbox Grid */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .checkbox-option:hover {
+            border-color: var(--primary);
+            background: #ecfdf5;
+        }
+
+        .checkbox-option input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 18px;
+            width: 100%;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+            margin-top: 30px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(5, 150, 105, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img src="logo_white.png" alt="HEq Logo" class="top-logo">
+    <div class="container">
+
+        <a href="hackathon.html" class="back-link"><i class="fas fa-arrow-left"></i> กลับสู่หน้าหลัก</a>
+
+        <div class="track-section">
+            <h2 class="section-header-title">🎯 เลือก Track การแข่งขัน</h2>
+            <div class="track-cards">
+                <div class="track-card" onclick="selectTrack('flood', this)">
+                    <div class="track-icon"><i class="fas fa-city"></i></div>
+                    <div class="track-title">Urban Flood Resilience</div>
+                    <div class="track-desc">นวัตกรรมรับมือน้ำท่วมเมืองอย่างยั่งยืน</div>
+                </div>
+                <div class="track-card" onclick="selectTrack('envirotech', this)">
+                    <div class="track-icon"><i class="fas fa-microchip"></i></div>
+                    <div class="track-title">EnviroTech Frontier</div>
+                    <div class="track-desc">เทคโนโลยี AI, IoT, Robotics สิ่งแวดล้อม</div>
+                </div>
+                <div class="track-card" onclick="selectTrack('treatment', this)">
+                    <div class="track-icon"><i class="fas fa-water"></i></div>
+                    <div class="track-title">Next-Gen Treatment Systems</div>
+                    <div class="track-desc">ระบบบำบัดมลพิษยุคใหม่</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="form-card" id="registerForm">
+            <div class="form-section-head">
+                <i class="fas fa-clipboard-check"></i> แบบฟอร์มลงทะเบียน
+            </div>
+
+            <form id="mainForm">
+                <!-- Selected Track Display -->
+                <div class="form-group full-width">
+                    <label>Track ที่เลือก <span class="required">*</span></label>
+                    <select name="category" id="categorySelect" required
+                        style="font-size: 1.1rem; padding: 15px; border-color: var(--primary); background: #ecfdf5; font-weight: 600;">
+                        <option value="">-- กรุณาคลิกเลือก Track ด้านบน --</option>
+                        <option value="flood">Urban Flood Resilience Innovation</option>
+                        <option value="envirotech">EnviroTech Frontier</option>
+                        <option value="treatment">Next-Gen Environmental Treatment Systems</option>
+                    </select>
+                </div>
+
+                <!-- Project Info -->
+                <div class="form-section-head"><i class="fas fa-lightbulb"></i> ข้อมูลโครงการ</div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>ชื่อทีม <span class="required">*</span></label>
+                        <input type="text" name="teamName" required placeholder="Ex. Earth Avengers">
+                    </div>
+                    <div class="form-group">
+                        <label>ชื่อนวัตกรรม <span class="required">*</span></label>
+                        <input type="text" name="projectTitle" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>รายละเอียดโครงการโดยสังเขป <span class="required">*</span></label>
+                        <textarea name="projectSummary" required placeholder="อธิบายแนวคิดหลัก (150-300 คำ)"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>ปัญหาที่ต้องการแก้ไข <span class="required">*</span></label>
+                        <textarea name="problemStatement" required
+                            placeholder="อธิบายปัญหาสิ่งแวดล้อมที่โครงการของคุณต้องการแก้ไข"></textarea>
+                    </div>
+                </div>
+
+                <!-- Proposal Upload -->
+                <div class="form-group full-width" style="margin-top: 20px;">
+                    <label>อัปโหลด Proposal (PDF, DOCX ไม่เกิน 10MB) <span class="required">*</span></label>
+                    <div class="file-upload-area" onclick="document.getElementById('proposalFile').click()">
+                        <div class="file-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                        <p><strong>คลิกเพื่ออัปโหลดไฟล์</strong></p>
+                        <div id="fileName" style="margin-top: 10px; color: var(--primary-dark); font-weight: 500;">
+                        </div>
+                        <input type="file" id="proposalFile" name="proposal" accept=".pdf,.doc,.docx" hidden required
+                            onchange="handleFileUpload(this)">
+                    </div>
+                </div>
+
+                <!-- Team Members Section -->
+                <div class="form-section-head"><i class="fas fa-users"></i> ข้อมูลสมาชิกทีม</div>
+
+                <div class="form-group full-width">
+                    <label>จำนวนสมาชิกในทีม <span class="required">*</span></label>
+                    <select name="teamSize" id="teamSize" required onchange="renderMembers()"
+                        style="font-size: 1.1rem;">
+                        <option value="1">👤 1 คน (Solo)</option>
+                        <option value="2">👥 2 คน (Duo)</option>
+                        <option value="3">👥 3 คน (Full Team)</option>
+                    </select>
+                </div>
+
+                <div id="membersContainer">
+                    <!-- Dynamic Members Will Be Injected Here -->
+                </div>
+
+                <!-- Additional Skills -->
+                <div class="form-section-head"><i class="fas fa-tools"></i> ทักษะและเครื่องมือ</div>
+                <div class="form-group full-width">
+                    <label>เลือกเครื่องมือที่ใช้ในโครงการ</label>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-option"><input type="checkbox" name="skills" value="coding"> Coding / App
+                            Dev</label>
+                        <label class="checkbox-option"><input type="checkbox" name="skills" value="iot"> IoT /
+                            Electronics</label>
+                        <label class="checkbox-option"><input type="checkbox" name="skills" value="ai"> AI / Machine
+                            Learning</label>
+                        <label class="checkbox-option"><input type="checkbox" name="skills" value="design"> Product
+                            Design / CAD</label>
+                        <label class="checkbox-option"><input type="checkbox" name="skills" value="biotech"> Bio-Tech /
+                            Materials</label>
+                        <label class="checkbox-option"><input type="checkbox" name="skills" value="data"> Data
+                            Science</label>
+                    </div>
+                </div>
+
+                <!-- Consent -->
+                <div class="form-group full-width" style="margin-top: 30px;">
+                    <label class="checkbox-option" style="background: #fdf2f8; border-color: #fce7f3;">
+                        <input type="checkbox" required>
+                        <span>ข้าพเจ้ายืนยันว่าข้อมูลทั้งหมดเป็นความจริง และยินยอมให้ใช้ข้อมูลเพื่อการติดต่อ</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    🚀 ส่งใบสมัครเข้าร่วมการแข่งขัน
+                </button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <p><strong>House of Equity (HEq)</strong> | work.houseofequity@gmail.com</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">© 2026 EarthX Hackathon. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderMembers(); // Show first member by default
+        });
+
+        // Track Selection Logic
+        function selectTrack(value, cardElement) {
+            // Update Select Dropdown
+            document.getElementById('categorySelect').value = value;
+
+            // Visual Feedback
+            document.querySelectorAll('.track-card').forEach(c => c.classList.remove('selected'));
+            cardElement.classList.add('selected');
+
+            // Scroll to form
+            document.getElementById('registerForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // File Upload Logic
+        function handleFileUpload(input) {
+            const fileNameDisplay = document.getElementById('fileName');
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('⚠️ ไฟล์มีขนาดใหญ่เกิน 10MB');
+                    input.value = '';
+                    fileNameDisplay.textContent = '';
+                } else {
+                    fileNameDisplay.innerHTML = `<i class="fas fa-check-circle"></i> ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+                }
+            }
+        }
+
+        // Dynamic Member Fields
+        function renderMembers() {
+            const size = parseInt(document.getElementById('teamSize').value);
+            const container = document.getElementById('membersContainer');
+            let html = '';
+
+            for (let i = 1; i <= size; i++) {
+                const isLeader = i === 1;
+                const title = isLeader ? 'หัวหน้าทีม (สมาชิกคนที่ 1)' : `สมาชิกคนที่ ${i}`;
+
+                html += `
+                    <div class="member-block">
+                        <div class="member-header">
+                            <i class="fas fa-user-circle"></i> ${title}
+                        </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>ชื่อ-นามสกุล <span class="required">*</span></label>
+                                <input type="text" name="member${i}_name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>อายุ (16-25 ปี) <span class="required">*</span></label>
+                                <input type="number" name="member${i}_age" min="16" max="25" required>
+                            </div>
+                            <div class="form-group">
+                                <label>อีเมล <span class="required">*</span></label>
+                                <input type="email" name="member${i}_email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>เบอร์โทรศัพท์ <span class="required">*</span></label>
+                                <input type="tel" name="member${i}_phone" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>สถาบันการศึกษา <span class="required">*</span></label>
+                                <input type="text" name="member${i}_school" required>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        // Admin Shortcut: Triple click on "แบบฟอร์มลงทะเบียน" to download data
+        let clickCount = 0;
+        document.querySelector('.form-section-head').addEventListener('click', () => {
+            clickCount++;
+            if (clickCount === 3) {
+                downloadData();
+                clickCount = 0;
+            }
+            setTimeout(() => clickCount = 0, 1000);
+        });
+
+        function downloadData() {
+            const data = JSON.parse(localStorage.getItem('hackathon_registrations') || '[]');
+            if (data.length === 0) {
+                alert('ยังไม่มีข้อมูลผู้สมัคร');
+                return;
+            }
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "registration_data.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        // **IMPORTANT: PASTE YOUR GOOGLE Apps Script Web App URL HERE**
+        const SCRIPT_URL = 'YOUR_GENERATED_WEB_APP_URL'; // Example: https://script.google.com/macros/s/...
+
+        // Form Submit
+        document.getElementById('mainForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerHTML;
+
+            // Validate Track Selection
+            if (!document.getElementById('categorySelect').value) {
+                alert('กรุณาเลือก Track การแข่งขันก่อน');
+                document.querySelector('.track-section').scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> กำลังส่งข้อมูล...';
+            btn.style.opacity = '0.7';
+
+            // 1. Capture Data
+            const formData = new FormData(this);
+            const entry = {
+                id: Date.now(),
+                timestamp: new Date().toLocaleString(),
+                track: formData.get('category'),
+                teamName: formData.get('teamName'),
+                projectTitle: formData.get('projectTitle'),
+                projectSummary: formData.get('projectSummary'),
+                problemStatement: formData.get('problemStatement'),
+                teamSize: formData.get('teamSize'),
+                members: [],
+                skills: formData.getAll('skills')
+            };
+
+            // Capture Dynamic Members
+            const size = parseInt(entry.teamSize);
+            for (let i = 1; i <= size; i++) {
+                entry.members.push({
+                    name: formData.get(`member${i}_name`),
+                    age: formData.get(`member${i}_age`),
+                    email: formData.get(`member${i}_email`),
+                    phone: formData.get(`member${i}_phone`),
+                    school: formData.get(`member${i}_school`)
+                });
+            }
+
+            // 2. Save to Local Storage (Backup)
+            const existingData = JSON.parse(localStorage.getItem('hackathon_registrations') || '[]');
+            existingData.push(entry);
+            localStorage.setItem('hackathon_registrations', JSON.stringify(existingData));
+
+            // 3. Send to Google Sheets
+            if (SCRIPT_URL && SCRIPT_URL.startsWith('https://script.google.com')) {
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Important for Google Script
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(entry)
+                })
+                    .then(response => {
+                        // Success handling
+                        console.log('Sent to Sheets', response);
+                        window.location.href = 'thankyou.html';
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        alert('มีปัญหาในการส่งข้อมูลไปยัง Google Sheets แต่ข้อมูลถูกบันทึกในเครื่องแล้ว');
+                        window.location.href = 'thankyou.html';
+                    });
+            } else {
+                // If in demo mode (no script URL yet)
+                console.warn('Google Script URL not set.');
+                setTimeout(() => {
+                    window.location.href = 'thankyou.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+
+</html>

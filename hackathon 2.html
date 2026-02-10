@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEq EarthX Hackathon 2026</title>
+    <!-- Modern Thai Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            /* Emerald 600 */
+            --primary-dark: #047857;
+            /* Emerald 700 */
+            --accent: #f59e0b;
+            /* Amber 500 */
+            --danger: #ef4444;
+            --bg-start: #064e3b;
+            /* Emerald 900 */
+            --bg-end: #10b981;
+            /* Emerald 500 */
+            --text-main: #1f2937;
+            --glass: rgba(255, 255, 255, 0.95);
+            --glass-card: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Kanit', sans-serif;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            min-height: 100vh;
+            color: var(--text-main);
+            padding-bottom: 50px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Decorative Background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            color: white;
+            padding: 80px 20px 60px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Top Logo */
+        .top-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 220px;
+            height: auto;
+            z-index: 1000;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            transition: transform 0.3s ease;
+        }
+
+        .top-logo:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .top-logo {
+                width: 140px;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        /* Timeline Section */
+        .timeline-container {
+            background: var(--glass-card);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            margin: 0 auto 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 850px;
+        }
+
+        .section-header-title {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Vertical Phase Timeline */
+        .phase-timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid var(--primary);
+            margin-left: 20px;
+        }
+
+        .phase-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .phase-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .phase-dot {
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .phase-title {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .phase-date {
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .phase-content {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .phase-content p {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .phase-content ul {
+            padding-left: 20px;
+            color: #4b5563;
+        }
+
+        .phase-content li {
+            margin-bottom: 5px;
+        }
+
+        /* Detailed Schedule (Phase 4) */
+        .schedule-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .time-slot {
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: flex-start;
+        }
+
+        .time {
+            font-weight: 600;
+            color: var(--primary);
+            min-width: 100px;
+            flex-shrink: 0;
+        }
+
+        .activity {
+            flex-grow: 1;
+        }
+
+        .activity strong {
+            color: var(--text-main);
+        }
+
+        .activity span {
+            display: block;
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        /* Toggle Button for Schedule */
+        .toggle-schedule {
+            background: #ecfdf5;
+            color: var(--primary-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .toggle-schedule:hover {
+            background: #d1fae5;
+        }
+
+        .schedule-details {
+            display: none;
+            margin-top: 15px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .schedule-details.show {
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            backdrop-filter: blur(5px);
+        }
+
+        .cta-btn {
+            background: var(--accent);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 30px rgba(245, 158, 11, 0.5);
+            background: #d97706;
+        }
+
+        .cta-sub {
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+</head>
+
+<body>
+    <img src="logo_white.png" alt="HEq Logo" class="top-logo">
+    <div class="container">
+
+        <!-- Header -->
+        <header class="hero-section">
+            <h1 class="hero-title">🌍 HEq EarthX Hackathon 2026</h1>
+            <p class="hero-subtitle">Environment × <span class="highlight">Next Gen
+                    Innovators</span><br>สร้างสรรค์นวัตกรรมสิ่งแวดล้อมที่ใช้งานได้จริงสำหรับเมืองไทย</p>
+        </header>
+
+        <!-- Timeline Section -->
+        <div class="timeline-container">
+            <h2 class="section-header-title"><i class="fas fa-route"></i> เส้นทางการแข่งขัน</h2>
+
+            <div class="phase-timeline">
+
+                <!-- Phase 1 -->
+                <div class="phase-item">
+                    <div class="phase-dot"></div>
+                    <div class="phase-title">
+                        Phase 1: PR & Awareness
+                        <span class="phase-date">1 - 15 ต.ค. 2569</span>
+                    </div>
+                    <div class="phase-content">
+                        <p><strong>ประชาสัมพันธ์โครงการ</strong></p>
+                        <ul>
+                            <li>เปิดตัวโครงการผ่าน Social Media (Facebook, Instagram, TikTok)</li>
+                            <li>เผยแพร่รายละเอียดการแข่งขันทั้ง 3 Tracks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase-item">
+                    <div class="phase-dot"></div>
+                    <div class="phase-title">
+                        Phase 2: Registration
+                        <span class="phase-date">16 ต.ค. - 15 พ.ย. 2569</span>
+                    </div>
+                    <div class="phase-content">
+                        <p><strong>เปิดรับสมัครอย่างเป็นทางการ</strong></p>
+                        <ul>
+                            <li><strong>16 ต.ค.:</strong> เปิดตัวเว็บไซต์ Official Website</li>
+                            <li><strong>17 ต.ค.:</strong> เปิดระบบรับสมัครและส่ง Proposal</li>
+                            <li><strong>15 พ.ย.:</strong> ปิดรับสมัคร (23:59 น.)</li>
+                        </ul>
+                        <div style="margin-top: 10px; font-size: 0.9em; color: var(--primary);">
+                            *Proposal ต้องประกอบด้วย: บทนำ, วัตถุประสงค์, วิธีการ, ประโยชน์, ผลคาดการณ์, สรุป
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-item">
+                    <div class="phase-dot"></div>
+                    <div class="phase-title">
+                        Phase 3: Top 30 Selection
+                        <span class="phase-date">16 พ.ย. - 2 ธ.ค. 2569</span>
+                    </div>
+                    <div class="phase-content">
+                        <p><strong>การคัดเลือกและประกาศผล 30 ทีม</strong></p>
+                        <ul>
+                            <li>16-25 พ.ย.: คณะกรรมการ HEq ประเมินโครงการ (ความคิดสร้างสรรค์, ความเป็นไปได้, Impact)
+                            </li>
+                            <li>26-28 พ.ย.: ยืนยันรายชื่อทีมที่ผ่านเข้ารอบ</li>
+                            <li><strong>30 พ.ย.: ประกาศผล Top 30 Teams</strong></li>
+                            <li>30 พ.ย. - 2 ธ.ค.: ทีมยืนยันสิทธิ์และรับคู่มือ Semi-Final</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="phase-item">
+                    <div class="phase-dot" style="background: var(--danger); box-shadow: 0 0 0 3px var(--danger);">
+                    </div>
+                    <div class="phase-title">
+                        Phase 4: Semi-Final & Final
+                        <span class="phase-date" style="background: var(--danger);">14 ธ.ค. 2569</span>
+                    </div>
+                    <div class="phase-content">
+                        <p><strong>วันแข่งขันจริง (On-site Hackathon Day)</strong></p>
+                        <p>การแข่งขันเข้มข้นตลอดทั้งวัน ตั้งแต่รอบ Semi-Final จนถึงรอบ Final Pitching</p>
+
+                        <button class="toggle-schedule" onclick="toggleSchedule(this)">
+                            <i class="fas fa-eye"></i> ดูตารางเวลากิจกรรมละเอียด
+                        </button>
+
+                        <div id="scheduleDetails" class="schedule-details">
+                            <h4 style="margin: 20px 0 10px; color: var(--primary-dark);">ช่วงเช้า: Semi-Final (08:00 -
+                                12:30)</h4>
+                            <div class="schedule-grid">
+                                <div class="time-slot">
+                                    <div class="time">08:00 - 08:45</div>
+                                    <div class="activity"><strong>ลงทะเบียน &
+                                            Check-in</strong><span>รับป้ายชื่อและเตรียมอุปกรณ์</span></div>
+                                </div>
+                                <div class="time-slot">
+                                    <div class="time">08:45 - 09:00</div>
+                                    <div class="activity"><strong>พิธีเปิด & Brief</strong><span>ชี้แจงกติกาโดย House of
+                                            Equity</span></div>
+                                </div>
+                                <div class="time-slot">
+                                    <div class="time">09:00 - 12:30</div>
+                                    <div class="activity"><strong>การแข่งขันรอบ Semi-Final (แยก 3 ห้อง)</strong>
+                                        <span>• Track 1: Urban Flood (ทีม 1-10)</span>
+                                        <span>• Track 2: EnviroTech (ทีม 1-10)</span>
+                                        <span>• Track 3: Treatment Systems (ทีม 1-10)</span>
+                                        <span style="color: var(--accent); font-size: 0.8em; margin-top: 5px;">(Pitch 8
+                                            นาที + Q&A 4 นาที)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 style="margin: 20px 0 10px; color: var(--primary-dark);">ช่วงเที่ยง: ประกาศผล (12:30 -
+                                13:00)</h4>
+                            <div class="schedule-grid">
+                                <div class="time-slot">
+                                    <div class="time">12:30 - 13:00</div>
+                                    <div class="activity"><strong>ประกาศผล Top 9 Finalists</strong><span>คัดเลือก 3
+                                            ทีมที่ดีที่สุดจากแต่ละ Track</span></div>
+                                </div>
+                            </div>
+
+                            <h4 style="margin: 20px 0 10px; color: var(--primary-dark);">ช่วงบ่าย: Final Pitch (13:00 -
+                                17:00)</h4>
+                            <div class="schedule-grid">
+                                <div class="time-slot">
+                                    <div class="time">13:45 - 16:20</div>
+                                    <div class="activity"><strong>Final Pitching (9 ทีมสุดท้าย)</strong>
+                                        <span>นำเสนอทีมละ 15 นาทีต่อหน้าคณะกรรมการชุดใหญ่</span>
+                                    </div>
+                                </div>
+                                <div class="time-slot">
+                                    <div class="time">16:20 - 17:00</div>
+                                    <div class="activity"><strong>คณะกรรมการตัดสินผล</strong><span>Networking Break
+                                            สำหรับผู้เข้าแข่งขัน</span></div>
+                                </div>
+                            </div>
+
+                            <h4 style="margin: 20px 0 10px; color: var(--primary-dark);">ช่วงเย็น: Award Ceremony (17:00
+                                - 18:30)</h4>
+                            <div class="schedule-grid">
+                                <div class="time-slot" style="background: #fffbeb;">
+                                    <div class="time">17:15 - 17:30</div>
+                                    <div class="activity"><strong>🏆 ประกาศผลและมอบรางวัล</strong>
+                                        <span>🥇 ชนะเลิศ (50,000 บาท)</span>
+                                        <span>🥈 รองอันดับ 1 (30,000 บาท)</span>
+                                        <span>🥉 รองอันดับ 2 (20,000 บาท)</span>
+                                    </div>
+                                </div>
+                                <div class="time-slot">
+                                    <div class="time">17:45 - 18:30</div>
+                                    <div class="activity"><strong>Networking
+                                            Reception</strong><span>พบปะพูดคุยและถ่ายภาพที่ระลึก</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section">
+            <a href="register.html" class="cta-btn">
+                <i class="fas fa-pencil-alt"></i> ลงทะเบียนเข้าร่วมแข่งขัน
+            </a>
+            <p class="cta-sub">รับสมัครตั้งแต่วันนี้ - 15 พฤศจิกายน 2569</p>
+        </div>
+
+        <div class="footer">
+            <p><strong>House of Equity (HEq)</strong> |work.houseofequity@gmail.com</p>
+            <p style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 0;">© 2026 EarthX Hackathon. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Schedule
+        function toggleSchedule(btn) {
+            const details = document.getElementById('scheduleDetails');
+            details.classList.toggle('show');
+            if (details.classList.contains('show')) {
+                btn.innerHTML = '<i class="fas fa-eye-slash"></i> ซ่อนตารางเวลา';
+            } else {
+                btn.innerHTML = '<i class="fas fa-eye"></i> ดูตารางเวลากิจกรรมละเอียด';
+            }
+        }
+    </script>
+</body>
+
+</html>
